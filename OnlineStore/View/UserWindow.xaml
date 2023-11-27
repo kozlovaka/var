@@ -1,0 +1,41 @@
+﻿<Window x:Class="OnlineStore.View.UserWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Title="User Window" Height="450" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Панель для фильтрации и поиска -->
+        <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="10">
+            <ComboBox x:Name="cbCategories" DisplayMemberPath="CategoryName" Margin="0 0 10 0" SelectedIndex="0" SelectionChanged="ComboBox_SelectionChanged"/>
+
+
+            <TextBox x:Name="txtSearch" Width="200" Margin="0,0,10,0"/>
+            <Button Content="Search" Click="btnSearch_Click"/>
+            <Button Content="Clear" Click="btnClearSearch_Click"/>
+        </StackPanel>
+
+        <!-- Панель для просмотра данных -->
+        <DataGrid x:Name="dgProducts" Grid.Row="1" AutoGenerateColumns="False" Margin="10,0,10,10">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Product ID" Binding="{Binding ProductID}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Product Name" Binding="{Binding ProductName}"/>
+                <DataGridTextColumn Header="Description" Binding="{Binding Description}"/>
+                <DataGridTemplateColumn Header="Category">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Category.CategoryName}" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</Window>
